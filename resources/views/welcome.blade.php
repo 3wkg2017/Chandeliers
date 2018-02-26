@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest reset css -->
     <link rel="stylesheet" href="./styles/reset.css">
     <!-- Latest compiled and minified bootswatch -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css">
@@ -15,10 +16,8 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/371c590d7c.js"></script>
-    <link rel="stylesheet" href="./styles/lights.css">
-    <!--[if IE]>
-        <link rel="stylesheet" type="text/css" href="./styles/lights_ie.css" />
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111255312-1"></script>
     <script>
@@ -75,13 +74,13 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class='item active'>
-                                    <img src='sources/img/Carousel/1.jpg' alt='Sietynas'>
+                                    <img src="{{ asset('img/Carousel/1.jpg') }}" alt='Sietynas'>
                                 </div>
                                 <div class='item'>
-                                    <img src='sources/img/Carousel/2.jpg' alt='Sietynas'>
+                                    <img src="{{ asset('img/Carousel/2.jpg') }}" alt='Sietynas'>
                                 </div>
                                 <div class='item'>
-                                    <img src='sources/img/Carousel/3.jpg' alt='Sietynas'>
+                                    <img src="{{ asset('img/Carousel/3.jpg') }}" alt='Sietynas'>
                                 </div>                        
                                 <div class="carousel-caption hide">
                                     <h1>Historical Chandeliers in Lithuania</h1>
@@ -109,7 +108,7 @@
                             </div>
                             <div class="panel-body">
                                 <p><i class="fa fa-user" aria-hidden="true"></i> Dr. Alantė Valtaitė</p>
-                                <p><i class="fa fa-envelope" aria-hidden="true"></i>sietynupavedas<img src="./img/page/eta.png" alt="Eta">gmail.com</p>
+                                <p><i class="fa fa-envelope" aria-hidden="true"></i>sietynupavedas<img src=" {{ asset('img/Service/eta.png') }}" alt="Eta">gmail.com</p>
                                 <p><i class="fa fa-copyright" aria-hidden="true"></i> <span class="thisYear"></span> Visos teises saugomos</p>
                                     <script>
                                         var d = new Date();
