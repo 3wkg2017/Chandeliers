@@ -231,3 +231,65 @@ ol > li {
   font-style: italic;
 }
 
+.card-holder {
+  display: inline;
+}
+
+.img-card {
+  text-decoration: none;
+}
+
+.img-card:hover {
+  text-decoration: none;
+}
+
+.img-holder {
+  text-decoration: none;
+  color: silver;
+}
+
+.img-holder img {
+  margin-top: 10px;
+  -webkit-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.img-holder:hover > img {
+  -webkit-box-shadow: 4px 5px 6px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 5px 6px 0px rgba(0, 0, 0, 0.75);
+}
+
+.cardas {
+  /* Add shadows to create the "card" effect */
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 5px;
+  /* 5px rounded corners */
+}
+
+/* On mouse-over, add a deeper shadow */
+
+.cardas:hover {
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+
+.containeris {
+  padding: 2px 16px;
+}
+
+/* Add rounded corners to the top left and the top right corner of the image */
+
+.imgas {
+  border-radius: 5px 5px 0 0;
+}
+
+.home-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
