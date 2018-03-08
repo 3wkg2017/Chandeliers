@@ -13,39 +13,39 @@ class InitTables extends Migration
      */
   public function up()
     {
-        Schema::create('menu', function($table)
+        Schema::create('menus', function($table)
         {
             $table->increments('id');
             $table->string('type'); // About / Articles / Links 
             $table->string('title');
-            $table->longText('text');
-            $table->string('image');
-            $table->string('file'); 
             $table->rememberToken();
             $table->timestamps();
         });
-        Schema::create('catalog', function($table)
+        
+        Schema::create('cards', function($table)
         {
             $table->increments('id');
             $table->string('title'); 
             $table->string('address');
+            $table->string('region'); 
             $table->string('style');
             $table->string('type');
             $table->string('code');
-            $table->integer('countryId');
+            $table->string('country');
             $table->string('material');
             $table->string('size');
             $table->string('date');
+            $table->string('from_date');
+            $table->string('till_date');
             $table->longText('text');
-            $table->string('image');
-            $table->string('file'); 
             $table->rememberToken();
             $table->timestamps();
         });
+
         Schema::create('images', function($table)
         {
             $table->increments('id');
-            $table->string('catalog_id'); 
+            $table->string('card_id'); 
             $table->string('image');
             $table->string('title'); 
             $table->rememberToken();
@@ -54,7 +54,7 @@ class InitTables extends Migration
         Schema::create('references', function($table)
         {
             $table->increments('id');
-            $table->string('catalog_id'); 
+            $table->string('card_id'); 
             $table->string('link'); 
             $table->rememberToken();
             $table->timestamps();
@@ -67,8 +67,8 @@ class InitTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu');
-        Schema::dropIfExists('catalog');
+        Schema::dropIfExists('menus');
+        Schema::dropIfExists('cards');
         Schema::dropIfExists('images');
         Schema::dropIfExists('references');
     }

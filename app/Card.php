@@ -6,5 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
 {
-    return $this->hasMany('App\Image', 'foreign_key');
+	protected $fillable = [
+            'title', 
+            'address',
+            'region',
+            'style',
+            'type',
+            'code',
+            'country',
+            'material',
+            'size',
+            'date',
+            'from_date',
+            'till_date',
+            'text'
+    ];
+
+   protected $table = 'cards';
 }

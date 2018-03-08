@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,30 +15,27 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#app'
+// const app = new Vue({
+//     el: '#app'
+// });
+
+
+
+$(document).ready(function(){
+    $(".addMoreFilesInputs").hide();
+    $(".addMoreReferencesInputs").hide();
+
+$(".addMoreFilesBtn").click(function(){
+        $(".addMoreFilesInputs").show(500);
+        $(".addMoreFilesBtn").hide(500);
+    });
 });
 
-
-// add new file inputs to card.create
-
-$(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-    
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div class="col-md-6"><input type="file" name="mytext[]"/><a href="#" class="remove_field"><button class="btn btn-primary"><i class="fa fa-remove"></i></button></a></div>'); //add input box
-        }
+$(document).ready(function(){
+    $(".addMoreReferencesBtn").click(function(){
+        $(".addMoreReferencesInputs").show(500);
+        $(".addMoreReferencesBtn").hide(500);
     });
-    
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
 });
