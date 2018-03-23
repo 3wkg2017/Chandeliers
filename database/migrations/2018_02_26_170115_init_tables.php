@@ -45,20 +45,35 @@ class InitTables extends Migration
         Schema::create('images', function($table)
         {
             $table->increments('id');
-            $table->string('card_id'); 
+            $table->integer('card_id')->unsigned(); 
             $table->string('image');
             $table->string('title'); 
             $table->rememberToken();
             $table->timestamps();
         });
+
+
+         Schema::table('images', function($table) {
+               $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');;
+           });
+
+
         Schema::create('references', function($table)
         {
             $table->increments('id');
-            $table->string('card_id'); 
+            $table->integer('card_id')->unsigned();
             $table->string('link'); 
             $table->rememberToken();
             $table->timestamps();
         });
+
+          Schema::table('references', function($table) {
+               $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');;
+           });
+
+
+
+
     }
     /**
      * Reverse the migrations.
@@ -73,3 +88,5 @@ class InitTables extends Migration
         Schema::dropIfExists('references');
     }
 }
+
+

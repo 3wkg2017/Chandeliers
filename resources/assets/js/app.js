@@ -39,3 +39,11 @@ $(document).ready(function(){
         $(".addMoreReferencesBtn").hide(500);
     });
 });
+
+
+$(document).ready(function(){
+	$(".comming-soon").click(function(){
+        $(".comming-soon-badges").removeClass('hidden');
+    });
+});
+

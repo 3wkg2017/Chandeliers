@@ -1,3 +1,4 @@
+@include('layouts.head')
 <!-- <body oncontextmenu="return false;"> -->
 <body>
     <div class="container">
@@ -31,5 +32,7 @@
         </footer>           
     </div>
 </body>
+ <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </html>

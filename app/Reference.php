@@ -18,4 +18,3 @@ class Reference extends Model
 
    protected $table = 'references';
 }
-}

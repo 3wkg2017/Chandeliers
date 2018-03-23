@@ -794,6 +794,12 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $(".comming-soon").click(function () {
+        $(".comming-soon-badges").removeClass('hidden');
+    });
+});
+
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {

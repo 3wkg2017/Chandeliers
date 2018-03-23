@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Century;
 use App\Region;
 use App\Card;
 use App\Image;
 use App\Reference;
-use App\Cards;
 use Validator;
+use File;
+
 
 
 class CardsController extends Controller
@@ -19,9 +21,32 @@ class CardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+
+    {   
+     //  dd($request);
+
+        // if($request->input('cardSearch')!=""){
+        //     $validatedSearch = $request->validate([
+        //     'cardSearch' => 'required|string|max:127',
+        //     ]);
+
+        //     dump($validatedSearch['cardSearch']);
+
+            //  $cards = Card::where('title', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('address', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('region', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('style', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('type', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('code', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('country', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('material', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('size', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('date', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('from_date', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('till_date', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->orWhere('text', 'like', '%' .  $validatedSearch['cardSearch'] . '%')->get();
+
+            // return view('cards.index', [
+            // 'cards' => $cards->paginate(10)
+            // ]);  
+        // }
+        // else{
+            $cards = new Card;
+            return view('cards.index', [
+            'cards' => $cards->paginate(10)
+            ]);    
+      //  }
+
+        
     }
 
     /**
@@ -40,8 +65,6 @@ class CardsController extends Controller
     }
 
 
-  
-
     /**
      * Store a newly created resource in storage.
      *
@@ -52,7 +75,172 @@ class CardsController extends Controller
     {
 
 
-        $validatedCard = $request->validate([
+        $validatedCard = $this->validateCard($request);
+        $card = new Card;
+        $lastCardId = $card->create($validatedCard)->id;  
+      
+
+      for ($i=0; $i <= 5; $i++){ 
+
+        if(isset($validatedCard['file-'.$i])){
+            if($validatedCard['file-'.$i]!=null or $validatedCard['file-title-'.$i]!=null){
+                $image = new Image;
+                $image->card_id = $lastCardId;
+                $path = $request->file('file-'.$i)->storePublicly('public');
+                $path = $this->pathModificator($path, 's');
+                $image->image = $path;
+                $image->title = $validatedCard['file-title-'.$i];
+                $image->save();  
+                $image = null;
+           }
+        }
+   
+            if($validatedCard['reference-'.$i]!=null or $validatedCard['reference-'.$i]!='' ){
+                $reference = new Reference;
+                $reference->card_id = $lastCardId;
+                $reference->link = $validatedCard['reference-'.$i];
+                $reference->save();  
+            $reference = null;
+           }
+     }
+        return redirect()->route('cards.index');
+
+     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $cardToShow = Card::findOrFail($id);
+            return view('cards.show', [
+            'card' =>  $cardToShow,
+        ]);
+    }
+
+
+
+    public function catalog($sort_type)
+    {
+
+    $sort_label = "";
+    $sort_badges = null;
+
+    switch ($sort_type) {
+
+        case '0':
+            $cardsToShow = Card::orderBy('style', 'desc')->paginate(6);
+            $sort_label = "Pagal pagaminimo laiką";
+        break;
+        case '1':
+            $cardsToShow = Card::orderBy('style', 'desc')->paginate(6);
+             $sort_label = "Pagal stilių";
+        break;
+        case '2':
+            $cardsToShow = Card::orderBy('type', 'desc')->paginate(6);
+             $sort_label = "Pagal tipologiją";
+        break;
+        case '3':
+            $cardsToShow = Card::orderBy('material', 'desc')->paginate(6);
+             $sort_label = "Pagal medžiagas";
+        break;
+        case '4':
+            $cardsToShow = Card::orderBy('country', 'desc')->paginate(6);
+             $sort_label = "Pagal pagaminimo šalį";
+        break;
+               
+        default:
+           $cardsToShow = Card::all()->paginate(6);
+            $sort_label = "Nėra jokio rušiavimo";
+        break;
+    }
+
+
+
+        return view('cards.catalog', [
+            'cards' =>  $cardsToShow,
+            'sort_label' =>  $sort_label
+        ]);
+    }
+
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $cardToEdit = Card::findOrFail($id);
+        $centuries = Century::all();
+        $regions = Region::all();
+             return view('cards.edit', [
+            'card' => $cardToEdit,
+            'centuries' => $centuries,
+            'regions' => $regions
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $cardToUpdate = Card::findOrFail($id);
+        
+      //  dd($request);
+
+        $validatedCard = $this->validateCard($request);
+        $cardToUpdate->update($validatedCard);   
+        $cardToUpdate->references()->update();
+        return redirect()->route('cards.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+      $cardToDestroy = Card::findOrFail($id);
+      foreach($cardToDestroy->images as $image){
+        $path = $image['image'];
+        $path = $this->pathModificator($path, 'd');
+     
+        Storage::delete($path);
+       }
+      $cardToDestroy->delete(); 
+     return redirect()->route('cards.index');
+
+    }
+
+
+    public function pathModificator($path, $direction){
+        $path = explode('/', $path);
+        if($direction == 'd'){
+            $path[0] = 'public';
+            
+        } else {
+           $path[0] = 'storage';
+        }
+        $path = implode('/', $path);
+        return $path;
+    }
+
+
+    public function validateCard(Request $request){
+         $validatedCard = $request->validate([
             'title' => 'required|string|max:127',
             'address' => 'required|string|max:127',
             'region' => 'required|string|max:127',
@@ -66,154 +254,26 @@ class CardsController extends Controller
             'from_date' => 'required|string|max:127',
             'till_date' => 'required|string|max:127',
             'text' => 'required|string|max:5000',
+            'file-0' => 'required|image|max:5120',
+            'file-1' => 'nullable|image|max:127',
+            'file-2' => 'nullable|image|max:127',
+            'file-3' => 'nullable|image|max:127',
+            'file-4' => 'nullable|image|max:127',
+            'file-5' => 'nullable|image|max:127',
             'file-title-0' => 'required|string|max:127',
-            'file-title-1' => 'string|max:127',
-            'file-title-2' => 'string|max:127',
-            'file-title-3' => 'string|max:127',
-            'file-title-4' => 'string|max:127',
-            'file-title-5' => 'string|max:127',
+            'file-title-1' => 'nullable|string|max:127',
+            'file-title-2' => 'nullable|string|max:127',
+            'file-title-3' => 'nullable|string|max:127',
+            'file-title-4' => 'nullable|string|max:127',
+            'file-title-5' => 'nullable|string|max:127',
             'reference-0' => 'required|string|max:127',
-            'reference-1' => 'string|max:127',
-            'reference-2' => 'string|max:127',
-            'reference-3' => 'string|max:127',
-            'reference-4' => 'string|max:127',
-            'reference-5' => 'string|max:127',
+            'reference-1' => 'nullable|string|max:127',
+            'reference-2' => 'nullable|string|max:127',
+            'reference-3' => 'nullable|string|max:127',
+            'reference-4' => 'nullable|string|max:127',
+            'reference-5' => 'nullable|string|max:127',
         ]);
-
-        $card = new Card;
-        $card->title = $validatedCard['title'];
-        $card->address = $validatedCard['address'];
-        $card->region = $validatedCard['region'];
-        $card->style = $validatedCard['style'];
-        $card->type = $validatedCard['type'];
-        $card->code = $validatedCard['code'];
-        $card->country = $validatedCard['country'];
-        $card->material = $validatedCard['material'];
-        $card->size = $validatedCard['size'];
-        $card->date = $validatedCard['date'];
-        $card->from_date = $validatedCard['from_date'];
-        $card->till_date = $validatedCard['till_date'];
-        $card->text = $validatedCard['text'];
-        $card->save();
-        $lastCardId = $card->id;
-
-      //  $path = $request->file('file-0')->storePublicly('public/dishes');
-      // $path = $this->pathModificator($path, 's');
-
-
-        // $image = new Image;
-        // $image->card_id = $lastCardId;
-        // $image->image = $validatedImage['image'];
-        // $image->title = $validatedImage['title'];
-        // $image->save();
-
-
-
-        // $reference = new Reference;
-
-        // for ($i=0; $i <= 5; $i++) { 
-        //   //  if($validatedImage['reference-'.$i]!=null or $validatedImage['reference-'.$i]!='' ){
-        //         $reference->card_id = $lastCardId;
-        //         $reference->link = $validatedImage['reference-'.$i];
-        //         $reference->save();  
-        //   //  }
-    
-
-
-
-
-        // $image = new Image;
-
-
-
-       // $post = $request->except('_token');
-       // Cards::create($post);
-
-        // $validatedImagesToStore  = $request->validate([
-        //     'file-title-0' => 'required|string|max:1000',
-        //     'file-title-1' => 'string|max:1000',
-        //     'file-title-2' => 'string|max:1000',
-        //     'file-title-3' => 'string|max:1000',
-        //     'file-title-4' => 'string|max:1000',
-        // ]);
-        // $validatedReferencesToStore  = $request->validate([
-
-        //     'reference-0' => 'required|string|max:1000',
-        //     'reference-1' => 'string|max:1000',
-        //     'reference-2' => 'string|max:1000',
-        //     'reference-3' => 'string|max:1000',
-        //     'reference-4' => 'string|max:1000',
-        // ]);
-
-
-
-       // $post = $request->except('_token');
-      //  $path = $data->file('file-0')->storePublicly('public/dishes');
-      //$path = $this->pathModificator($path, 's');
-    
-        
-        //dump($validatedCard);
-       // $post['dish_picture'] = $path;
-       // Dishes::create($post);
-        // return redirect()->route('welcome');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-
-    public function pathModificator($path, $direction){
-
-        $path = explode('/', $path);
-        if($direction == 'd'){
-            $path[0] = '';
-        } else {
-           $path[0] = '/storage';
-        }
-        $path = implode('/', $path);
-        return $path;
+        return $validatedCard;
     }
 
 }

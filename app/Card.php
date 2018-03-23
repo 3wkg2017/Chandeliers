@@ -23,4 +23,19 @@ class Card extends Model
     ];
 
    protected $table = 'cards';
+
+
+    public function references()
+    {
+        return $this->hasMany('App\Reference');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
+
 }
+
+
+

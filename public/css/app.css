@@ -297,3 +297,8 @@ i {
   margin-top: 10px;
 }
 
+.no-style {
+  border: none;
+  background: none;
+}
+

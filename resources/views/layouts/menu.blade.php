@@ -10,51 +10,34 @@
                                     </a>
                                 </div>
                                 <ul class="nav navbar-nav">
-                                    <li><a href="index.php#about">Apie projektą</a></li>
+                                    <li><a href="{{ route('welcome')}}#about">Apie projektą</a></li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sietynai
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="">Pagal pagaminimo laiką</a></li>
-                                            <li><a href="">Pagal stilių</a></li>
-                                            <li><a href="">Pagal tipologiją</a></li>
-                                            <li><a href="">Pagal medžiagas</a></li>
-                                            <li><a href="">Pagal pagaminimo šalį</a></li>
+                                            <li><a href="{{ route('cards.catalog', ['sort_order' => 0]) }}">Pagal pagaminimo laiką</a></li>
+                                            <li><a href="{{ route('cards.catalog', ['sort_order' => 1]) }}">Pagal stilių</a></li>
+                                            <li><a href="{{ route('cards.catalog', ['sort_order' => 2]) }}">Pagal tipologiją</a></li>
+                                            <li><a href="{{ route('cards.catalog', ['sort_order' => 3]) }}">Pagal medžiagas</a></li>
+                                            <li><a href="{{ route('cards.catalog', ['sort_order' => 4]) }}">Pagal pagaminimo šalį</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="">Sunikę sietynai</a></li>
-                                    <li><a href="">Straipsniai</a></li>
-                                    <li><a href="">Nuorodos</a></li>
-                                    <li><a href="">Kontaktai</a></li>
-                                    <li><a href="">English</a></li>
+                                    <li><a href="{{ route('welcome') }}#articles">Straipsniai</a></li>
+                                    <li><a href="{{ route('welcome') }}#links">Nuorodos</a></li>
+                                    <li><a href="{{ route('welcome') }}#contacts">Kontaktai</a></li>
+                                    <li><a href="{{ route('english') }}">English</a></li>
     
                                     @if(Auth::check())
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Valdymo skydas
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="">Naujenos</a></li>
-                                            <li><a href="">Straipsniai</a></li>
-                                            <li><a href="">Nuorodos</a></li>
-                                            <li><a href="{{ route('cards.create') }}">Kortelės</a></li> 
-                                            <li><a href="{{ route('register') }}">Valdytojai</a></li>      
-                                        </ul>
-                                    </li>
+                                        <li><a href="{{ route('home') }}">Menu</a></li>
                                     @endif
-
-
-
-                                    <!-- Authentication Links -->
                                     @guest
-                                    <!-- <li><a href="{{ route('login') }}"> <i class="fas fa-sign-in-alt" aria-hidden="true"></i></a></li> -->
-                                    <li><a href="{{ route('login') }}"><i class="fa fa-sign-in"></i></a></li>
+                                    <li><a href="{{ route('login') }}">Prisijungti</a></li>
                                     @else
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();"> 
-                                            <!-- <i class="fas fa-sign-out-alt" aria-hidden="true"></i> -->
-                                                <i class="fa fa-sign-out"></i>
+                                                Atsijungti
                                             </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}

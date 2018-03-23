@@ -4,16 +4,17 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Pridėti kortele</div>
+                <div class="panel-heading">Redaguoti kortelę</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('cards.store') }}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-               
+                    <form class="form-horizontal" method="POST" action="{{ route('cards.update', $card->id) }}" enctype="multipart/form-data">
+                            {{ method_field('PUT') }}
+                            {{ csrf_field() }}
+
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Pavadinimas</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title', $card->title) }}" required autofocus>
 
                                 @if ($errors->has('title'))
                                     <span class="help-block">
@@ -26,7 +27,7 @@
                             <label for="address" class="col-md-4 control-label">Adresas</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autofocus>
+                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address', $card->address) }}" required autofocus>
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -43,9 +44,15 @@
                             <label for="region" class="col-md-4 control-label">Regionas</label>
 
                             <div class="col-md-6">
-                                <select id="region" type="text" class="form-control" name="region" value="{{ old('region') }}" required autofocu>
+                                <select id="region" type="text" class="form-control" name="region" value="{{ old('region', $card->regions) }}" required autofocus>
                                     @foreach($regions as $region)
-                                    <option value="{{ $region['regions'] }}">{{ $region['regions'] }}</option>
+                                        <option 
+                                            @if(old('region', $card->regions) == $region['regions'])) 
+                                                selected 
+                                            @endif 
+                                        >
+                                            {{ $region['regions']}}
+                                        </option>
                                     @endforeach      
                                 </select>    
                                 
@@ -65,7 +72,7 @@
                             <label for="style" class="col-md-4 control-label">Stylius</label>
 
                             <div class="col-md-6">
-                                <input id="style" type="text" class="form-control" name="style" value="{{ old('style') }}" required autofocus>
+                                <input id="style" type="text" class="form-control" name="style" value="{{ old('style', $card->style) }}" required autofocus>
 
                                 @if ($errors->has('style'))
                                     <span class="help-block">
@@ -77,7 +84,7 @@
                    		<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                             <label for="type" class="col-md-4 control-label">Tipas</label>
                             <div class="col-md-6">
-                                <input id="type" type="text" class="form-control" name="type" value="{{ old('type') }}" required autofocus>
+                                <input id="type" type="text" class="form-control" name="type" value="{{ old('type', $card->type) }}" required autofocus>
 
                                 @if ($errors->has('type'))
                                     <span class="help-block">
@@ -90,7 +97,7 @@
                             <label for="code" class="col-md-4 control-label">Kodas / Inv. Nr.</label>
 
                             <div class="col-md-6">
-                                <input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" required autofocus>
+                                <input id="code" type="text" class="form-control" name="code" value="{{ old('code', $card->code) }}" required autofocus>
 
                                 @if ($errors->has('code'))
                                     <span class="help-block">
@@ -102,7 +109,7 @@
 	 					<div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                             <label for="country" class="col-md-4 control-label">Šalis</label>
                             <div class="col-md-6">
-                                <input id="country" type="text" class="form-control" name="country" value="{{ old('country') }}" required autofocus>
+                                <input id="country" type="text" class="form-control" name="country" value="{{ old('country', $card->country) }}" required autofocus>
 
                                 @if ($errors->has('country'))
                                     <span class="help-block">
@@ -115,7 +122,7 @@
                             <label for="material" class="col-md-4 control-label">Medžiaga</label>
 
                             <div class="col-md-6">
-                                <input id="material" type="text" class="form-control" name="material" value="{{ old('material') }}" required autofocus>
+                                <input id="material" type="text" class="form-control" name="material" value="{{ old('material', $card->material) }}" required autofocus>
 
                                 @if ($errors->has('material'))
                                     <span class="help-block">
@@ -128,7 +135,7 @@
                             <label for="size" class="col-md-4 control-label">Išmatavimai</label>
 
                             <div class="col-md-6">
-                                <input id="size" type="text" class="form-control" name="size" value="{{ old('size') }}" required autofocus>
+                                <input id="size" type="text" class="form-control" name="size" value="{{ old('size', $card->size) }}" required autofocus>
 
                                 @if ($errors->has('size'))
                                     <span class="help-block">
@@ -141,7 +148,7 @@
                             <label for="date" class="col-md-4 control-label">Data</label>
 
                             <div class="col-md-6">
-                                <input id="date" type="text" class="form-control" name="date" value="{{ old('date') }}" required autofocus>
+                                <input id="date" type="text" class="form-control" name="date" value="{{ old('date', $card->date) }}" required autofocus>
 
                                 @if ($errors->has('date'))
                                     <span class="help-block">
@@ -154,7 +161,7 @@
                             <label for="from_date" class="col-md-4 control-label">Laikotarpis nuo</label>
 
                             <div class="col-md-2">
-                                <select id="from_date" type="text" class="form-control" name="from_date" value="{{ old('from_date') }}" required autofocus>
+                                <select id="from_date" type="text" class="form-control" name="from_date" value="{{ old('from_date', $card->from_date) }}" required autofocus>
                                     @foreach($centuries as $century)
                                     <option value="{{ $century['centuries'] }}">{{ $century['centuries'] }}</option>
                                     @endforeach      
@@ -171,7 +178,7 @@
                             <label for="till_date" class="col-md-4 control-label">Laikotarpis iki</label>
 
                             <div class="col-md-2">
-                                <select id="till_date" type="text" class="form-control" name="till_date" value="{{ old('till_date') }}" required autofocus>
+                                <select id="till_date" type="text" class="form-control" name="till_date" value="{{ old('till_date', $card->till_date) }}" required autofocus>
                                     @foreach($centuries as $century)
                                     <option value="{{ $century['centuries'] }}">{{ $century['centuries']}}</option>
                                     @endforeach      
@@ -188,8 +195,8 @@
 						<div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                             <label for="text" class="col-md-4 control-label">Tekstas</label>
                             <div class="col-md-6">
-                            	 <textarea id="text" type="text" class="form-control" name="text"  required autofocus >
-                					{{ old('text') }}
+                            	 <textarea id="text" type="text" class="form-control" name="text" value="{!! old('text', $card->text) !!}" required autofocus >
+                					.
            						</textarea>
            					    <script>
                 					CKEDITOR.replace( 'text' );
@@ -203,71 +210,57 @@
                                 @endif
                             </div>
                         </div>	
-                        <div class="input_fields_wrap form-group{{ $errors->has('file-0') ? ' has-error' : '' }}">
-                            <label for="file-0" class="col-md-4 control-label">Prideti bylą</label>
-                            <div class="col-md-6">
-                                <input id="file-0" type="file" class="form-control" name="file-0" value="{{ old('file-0') }}" required autofocus>
-                                @if ($errors->has('file-0'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('file-0') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('file-title-0') ? ' has-error' : '' }}">
-                            <label for="file-title-0" class="col-md-4 control-label">Pavadinimas</label>
 
-                            <div class="col-md-6">
-                                <input id="file-title-0" type="text" class="form-control" name="file-title-0" value="{{ old('file-title-0') }}" required autofocus>
 
-                                    <i class="fa fa-plus addMoreFilesBtn"></i>
+
+
+                        <div class="card-holder">   
+                        <div class="gallery-holder">                            
+                            <div class="image-holder">
+                                @foreach($card->images as $image)
+
+                                   <img src="{{ asset($image->image) }}" alt="{{ $image->title }}" />
+                                        <div class="input_fields_wrap form-group{{ $errors->has('file-$loop->index') ? ' has-error' : '' }}">
+                                            <label for="file-{{$loop->index}}" class="col-md-4 control-label">Pakeisti bylą</label>
+                                                <div class="col-md-6">
+                                                    <input id="file-{{$loop->index}}" type="file" class="form-control" name="file-{{$loop->index}}" value="{{ old('file-$loop->index', $card->images[$loop->index]->image) }}" required autofocus>
+                                                    @if ($errors->has('file-$loop->index'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('file-$loop->index') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                        </div>
+                                        <div class="form-group{{ $errors->has('file-title-$loop->index') ? ' has-error' : '' }}">
+                                            <label for="file-title-{{$loop->index}}" class="col-md-4 control-label">Pakeisti pavadinimą</label>
+
+                                            <div class="col-md-6">
+                                                <input id="file-title-{{$loop->index}}" type="text" class="form-control" name="file-title-{{$loop->index}}" value="{{ old('file-title-$loop->index', $card->images[0]->title) }}" required autofocus>
                                 
-                                @if ($errors->has('file-title-0'))
+                                @if ($errors->has('file-title-$loop->index'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('file-title-0') }}</strong>
+                                        <strong>{{ $errors->first('file-title-$loop->index') }}</strong>
                                     </span>
                                 @endif
                             </div>
                          </div>
-
-                        <!-- add new file and description -->
-                        <div class="addMoreFilesInputs ">
-                        @for($i = 1; $i<=5; $i++)
-                          <div class="input_fields_wrap form-group{{ $errors->has('file-$i') ? ' has-error' : '' }}">
-                            <label for="file-{{$i}}" class="col-md-4 control-label">Prideti bylą</label>
-                            <div class="col-md-6">
-                                <input id="file-{{$i}}" type="file" class="form-control" name="file-{{$i}}" value="{{ old('file-$i') }}"  autofocus>
-                                @if ($errors->has('file-$i'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('file-$i') }}</strong>
-                                    </span>
-                                @endif
+                              @endforeach
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('file-title-$i') ? ' has-error' : '' }}">
-                            <label for="file-title-{{$i}}" class="col-md-4 control-label">Pavadinimas</label>
-
-                            <div class="col-md-6">
-                                <input id="file-title-{{$i}}" type="text" class="form-control" name="file-title-{{$i}}" value="{{ old('file-title-$i') }}"  autofocus>
-                                
-                                @if ($errors->has('file-title-$i'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('file-title-$i') }}</strong>
-                                    </span>
-                                @endif
-                                </div>
-                            </div>
-                         @endfor
                         </div>
-                        
-                        <!-- references -->
+
+
+
+
+                     
+                                            <!-- references -->
                         <div class="form-group{{ $errors->has('reference-0') ? ' has-error' : '' }}">
                             <label for="reference-0" class="col-md-4 control-label">Nuoroda</label>
 
                             <div class="col-md-6">
-                                <input id="reference-0" type="text" class="form-control" name="reference-0" value="{{ old('reference-0') }}" required autofocus>
+                                <input id="reference-0" type="text" class="form-control" name="reference-0" value="{{ old('reference-0', $card->references[0]->link) }}" required autofocus>
 
-                                 <i class="fa fa-plus addMoreReferencesBtn"></i>
+                              
                                 @if ($errors->has('reference-0'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('reference-0') }}</strong>
@@ -276,12 +269,13 @@
                             </div>
                         </div>
                         <!-- end of references -->
-                        <div class="addMoreReferencesInputs">
+                        <div>
                          @for($i = 1; $i<=5; $i++)
+                                @if(isset($card->references[$i]))
                         <div class="form-group{{ $errors->has('reference-$i') ? ' has-error' : '' }}">
                             <label for="reference-{{$i}}" class="col-md-4 control-label">Nuoroda</label>
                             <div class="col-md-6">
-                                <input id="reference-{{$i}}" type="text" class="form-control" name="reference-{{$i}}" value="{{ old('reference-$i') }}"  autofocus>
+                                <input id="reference-{{$i}}" type="text" class="form-control" name="reference-{{$i}}" value="{{ old('reference-$i', $card->references[$i]->link) }}"  autofocus>
                                  
                                 @if ($errors->has('reference-$i'))
                                     <span class="help-block">
@@ -291,6 +285,7 @@
                             </div>
                         </div>
                         <!-- end of references -->
+                            @endif
                          @endfor
                         </div>
 
