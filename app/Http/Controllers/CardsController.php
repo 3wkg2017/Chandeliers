@@ -16,6 +16,14 @@ use File;
 
 class CardsController extends Controller
 {
+    
+      public function __construct()
+    {
+        $this->middleware('isAdmin', ['except' => ['catalog', 'show']]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -128,42 +136,52 @@ class CardsController extends Controller
 
     $sort_label = "";
     $sort_badges = null;
+    $cardsToShow = null;
+    $criteria = null;
 
-    switch ($sort_type) {
+        switch ($sort_type) {
+            case '0': 
+                $sort_label = "Pagal pagaminimo laiką";
+                $criteria = 'date';
+            break;
+            case '1':
+                 $sort_label = "Pagal stilių";
+                 $criteria = 'style';
+            break;
+            case '2':
+                 $sort_label = "Pagal tipologiją";
+                 $criteria = 'type';
+            break;
+            case '3':
+                 $sort_label = "Pagal medžiagas";
+                 $criteria = 'material';
+            break;
+            case '4':
+                 $sort_label = "Pagal pagaminimo šalį";
+                 $criteria = 'country';
+            break;
+            case '5':
+                 $sort_label = "Sunykę sietynai";
+                 $criteria = 'country';
+            break;
+                   
+            default:
+                $cardsToShow = Card::all()->paginate(6);
+                $sort_label = "Visi iš eilės";
+            break;
+        }
 
-        case '0':
-            $cardsToShow = Card::orderBy('style', 'desc')->paginate(6);
-            $sort_label = "Pagal pagaminimo laiką";
-        break;
-        case '1':
-            $cardsToShow = Card::orderBy('style', 'desc')->paginate(6);
-             $sort_label = "Pagal stilių";
-        break;
-        case '2':
-            $cardsToShow = Card::orderBy('type', 'desc')->paginate(6);
-             $sort_label = "Pagal tipologiją";
-        break;
-        case '3':
-            $cardsToShow = Card::orderBy('material', 'desc')->paginate(6);
-             $sort_label = "Pagal medžiagas";
-        break;
-        case '4':
-            $cardsToShow = Card::orderBy('country', 'desc')->paginate(6);
-             $sort_label = "Pagal pagaminimo šalį";
-        break;
-               
-        default:
-           $cardsToShow = Card::all()->paginate(6);
-            $sort_label = "Nėra jokio rušiavimo";
-        break;
-    }
+            $cardsToShow = Card::orderBy($criteria, 'desc')->paginate(6);
+            $badges = Card::select($criteria)->distinct()->get(); 
+            $badgesCount = Card::select($criteria)->distinct()->count();
+            $badges[0] = $badges[0][$criteria];
+            $badges[1] = $badgesCount;
 
-
-
-        return view('cards.catalog', [
-            'cards' =>  $cardsToShow,
-            'sort_label' =>  $sort_label
-        ]);
+            return view('cards.catalog', [
+                'cards' =>  $cardsToShow,
+                'sort_label' =>  $sort_label,
+                'badges' => $badges
+            ]);
     }
 
 
@@ -197,7 +215,7 @@ class CardsController extends Controller
     {
         $cardToUpdate = Card::findOrFail($id);
         
-      //  dd($request);
+     
 
         $validatedCard = $this->validateCard($request);
         $cardToUpdate->update($validatedCard);   
@@ -266,12 +284,12 @@ class CardsController extends Controller
             'file-title-3' => 'nullable|string|max:127',
             'file-title-4' => 'nullable|string|max:127',
             'file-title-5' => 'nullable|string|max:127',
-            'reference-0' => 'required|string|max:127',
-            'reference-1' => 'nullable|string|max:127',
-            'reference-2' => 'nullable|string|max:127',
-            'reference-3' => 'nullable|string|max:127',
-            'reference-4' => 'nullable|string|max:127',
-            'reference-5' => 'nullable|string|max:127',
+            'reference-0' => 'required|string|max:256',
+            'reference-1' => 'nullable|string|max:256',
+            'reference-2' => 'nullable|string|max:256',
+            'reference-3' => 'nullable|string|max:256',
+            'reference-4' => 'nullable|string|max:256',
+            'reference-5' => 'nullable|string|max:256',
         ]);
         return $validatedCard;
     }

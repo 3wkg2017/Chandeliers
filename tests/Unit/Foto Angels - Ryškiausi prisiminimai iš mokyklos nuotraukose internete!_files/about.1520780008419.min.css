@@ -1,0 +1,61 @@
+
+/* line 47 : /Users/jevgenijsgolojads/work/angels/front-end/app/assets/stylus/about.styl */
+
+/* line 1 : /Users/jevgenijsgolojads/work/angels/front-end/node_modules/grunt-contrib-stylus/node_modules/stylus/lib/functions/index.styl */
+
+/* line 1 : /Users/jevgenijsgolojads/work/angels/front-end/app/assets/stylus/about.styl */
+
+/* line 2 : /Users/jevgenijsgolojads/work/angels/front-end/app/assets/stylus/about.styl */
+.about-page .dad-camera {
+  display: block;
+  position: relative;
+  width: 376px;
+  margin-bottom: 35px;
+}
+
+/* line 7 : /Users/jevgenijsgolojads/work/angels/front-end/app/assets/stylus/about.styl */
+.about-page .dad-camera:after {
+  content: '';
+  width: 180px;
+  height: 180px;
+  background-image: url("../images/site/dad-camera.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 3px solid #fff;
+  border-radius: 224px;
+  position: absolute;
+  top: -70px;
+  right: -200px;
+  display: block;
+}
+
+/* line 22 : /Users/jevgenijsgolojads/work/angels/front-end/app/assets/stylus/about.styl */
+.about-page .questinary {
+  display: block;
+  position: relative;
+  width: 376px;
+  margin-bottom: 65px;
+  padding-left: 150px;
+}
+
+/* line 28 : /Users/jevgenijsgolojads/work/angels/front-end/app/assets/stylus/about.styl */
+.about-page .questinary:after {
+  content: '';
+  width: 180px;
+  height: 180px;
+  background-image: url("../images/site/quest.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border: 3px solid #fff;
+  border-radius: 224px;
+  position: absolute;
+  top: -25px;
+  left: -50px;
+  display: block;
+}
+
+/* line 44 : /Users/jevgenijsgolojads/work/angels/front-end/app/assets/stylus/about.styl */
+.about-page ol.wishes {
+  list-style-type: none;
+}

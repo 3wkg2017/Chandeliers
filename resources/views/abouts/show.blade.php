@@ -1,5 +1,4 @@
-
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->user_type == 'admin')
 	@extends('layouts.app')
 	@section('content')
 		<div class="row">

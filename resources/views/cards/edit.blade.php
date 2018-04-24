@@ -1,4 +1,5 @@
 
+@if(Auth::check() && Auth::user()->user_type == 'admin')
 @extends('layouts.app')
 @section('content')
     <div class="row">
@@ -7,8 +8,9 @@
                 <div class="panel-heading">Redaguoti kortelę</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('cards.update', $card->id) }}" enctype="multipart/form-data">
-                            {{ method_field('PUT') }}
-                            {{ csrf_field() }}
+                       {{ method_field('PUT') }}
+                        {{ csrf_field() }}
+                          
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Pavadinimas</label>
@@ -304,3 +306,4 @@
 
 
 @endsection
+@endif

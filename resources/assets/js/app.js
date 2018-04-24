@@ -23,6 +23,21 @@ require('./bootstrap');
 
 
 
+// $(document).ready(function(){
+//     var today = new Date();
+//       var currentHour = today.getHours();
+//        if (currentHour%3 == 0) {
+//           $(".home-image").attr('src', "{{ asset('img/Carousel/1.jpg') }}");
+//       } else if ((currentHour-1)%3 == 0) {
+//           $(".home-image").attr('src', "{{ asset('img/Carousel/2.jpg') }}");
+//       } else {
+//           $(".home-image").attr('src', "{{ asset('img/Carousel/3.jpg') }}");
+//       }
+// });
+
+
+   
+
 $(document).ready(function(){
     $(".addMoreFilesInputs").hide();
     $(".addMoreReferencesInputs").hide();
@@ -46,4 +61,6 @@ $(document).ready(function(){
         $(".comming-soon-badges").removeClass('hidden');
     });
 });
+
+
 

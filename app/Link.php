@@ -11,7 +11,7 @@ class Link extends Model
 			'url'
     ];
 
-   protected $table = 'liks';
+   protected $table = 'links';
 
 }
 

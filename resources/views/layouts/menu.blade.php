@@ -23,11 +23,12 @@
                                             <li><a href="{{ route('cards.catalog', ['sort_order' => 4]) }}">Pagal pagaminimo šalį</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="">Sunikę sietynai</a></li>
+                                    <li><a href="{{ route('cards.catalog', ['sort_order' => 5]) }}">Sunikę sietynai</a></li>
+                                    <!-- <li><a href="{{ route('welcome') }}#posts">Naujenos</a></li> -->
                                     <li><a href="{{ route('welcome') }}#articles">Straipsniai</a></li>
                                     <li><a href="{{ route('welcome') }}#links">Nuorodos</a></li>
                                     <li><a href="{{ route('welcome') }}#contacts">Kontaktai</a></li>
-                                    <li><a href="{{ route('english') }}">English</a></li>
+                                    <li><a href="{{ route('englishs.show') }}">English</a></li>
     
                                     @if(Auth::check())
                                         <li><a href="{{ route('home') }}">Menu</a></li>

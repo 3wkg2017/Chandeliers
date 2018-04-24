@@ -1,8 +1,16 @@
 
-@extends('layouts.app')
+@if(Auth::check() && Auth::user()->user_type == 'admin')@extends('layouts.app')
 @section('content')
+
+
 	<div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="panel panel-default">
+			  		<div class="panel-heading"><h3>Kortelės</h3></div>
+			  		<div class="panel-body">
+
+        	<a href="{{ route('cards.create') }}"><button class="btn btn-primary">Kurti naują</button></a>
+
 			<table class="table table-striped">
 			  <thead>
 			    <tr>
@@ -66,32 +74,9 @@
    </div>
  </div>
 
-<div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-    	<div>
-		<form action="{{ route('cards.index') }}" method="post" >
-			{{ csrf_field() }}
-		        <div class="form-group{{ $errors->has('cardSearch') ? ' has-error' : '' }}">
-                            <label for="cardSearch" class="col-md-4 control-label">Ieškoti</label>
-                            <div class="col-md-6">
-                                <input id="cardSearch" type="text" class="form-control" name="cardSearch" value="{{ old('cardSearch') }}" required autofocus>
-                                @if ($errors->has('cardSearch'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('cardSearch') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-		<button class="no-style" type="submit"><i class="fa fa-search" style="color:blue"></i></button>
-		</form>
-	</div>
-
-    </div>
-
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-		<a href="{{ route('cards.create') }}"><button class="btn btn-primary">Nauja kortelė</button>    	
-    </div>
-	
-     </div>
+</div>
+</div>
  
 @endsection
+
+@endif

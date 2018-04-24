@@ -7,6 +7,13 @@ use App\About;
 
 class AboutsController extends Controller
 {
+    
+   public function __construct()
+    {
+        $this->middleware('isAdmin', ['except' => ['index', 'show']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -83,7 +90,7 @@ class AboutsController extends Controller
     public function update(Request $request, $id)
     {
         $aboutToUpdate = About::findOrFail($id);
-        $validatedInput = $this->validatedInput($request);
+        $validatedInput = $this->validateInput($request);
         $aboutToUpdate->update($validatedInput);   
         return redirect()->route('abouts.index');
     }

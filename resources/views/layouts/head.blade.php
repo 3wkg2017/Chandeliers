@@ -10,17 +10,13 @@
      <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Latest reset css -->
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css">
     <!-- jQuery library -->
- 
-    <script src="https://use.fontawesome.com/371c590d7c.js"></script>
+     <script src="https://use.fontawesome.com/371c590d7c.js"></script>
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script> -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <!-- CKEditor -->
     <script src="http://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111255312-1"></script>
     <script>

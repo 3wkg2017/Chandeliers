@@ -1,5 +1,5 @@
 
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->user_type == 'admin')
 @extends('layouts.app')
 @section('content')
     <div class="row">
@@ -7,14 +7,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Apie skiltis</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" method="PUT" action="{{ route('abouts.update', $about->id) }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('abouts.update', $about->id) }}">
+                        {{ method_field('PUT') }}
                         {{ csrf_field() }}
+                        
                        	<script src="http://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 						<div class="form-group{{ $errors->has('text', $about) ? ' has-error' : '' }}">
                             <label for="text" class="col-md-4 control-label">Aprašas</label>
                             <div class="col-md-6">
                             	 <textarea id="text" type="text" class="form-control" name="text" required autofocus >
-                					{{ old('text', $about) }}
+                					{{ old('text', $about->text) }}
            						</textarea>
            					    <script>
                 					CKEDITOR.replace( 'text' );

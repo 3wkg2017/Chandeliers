@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Link;
 
 class LinksController extends Controller
 {
+    
+ public function __construct()
+    {
+        $this->middleware('isAdmin', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,10 @@ class LinksController extends Controller
      */
     public function index()
     {
-        //
+        $linksToShow = Link::paginate(5);
+            return view('links.index', [
+            'links' =>  $linksToShow
+            ]);    
     }
 
     /**
@@ -23,7 +33,7 @@ class LinksController extends Controller
      */
     public function create()
     {
-        //
+          return view('links.create'); 
     }
 
     /**
@@ -34,7 +44,10 @@ class LinksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedInput = $this->validateInput($request);
+        $link = new Link;
+        $link->create($validatedInput);  
+        return redirect()->route('links.index');
     }
 
     /**
@@ -45,8 +58,12 @@ class LinksController extends Controller
      */
     public function show($id)
     {
-        //
+        $linkToShow = Link::findOrFail($id);
+            return view('links.show', [
+            'link' =>  $linkToShow,
+        ]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -56,7 +73,10 @@ class LinksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $linkToEdit = Link::findOrFail($id);
+             return view('links.edit', [
+            'link' => $linkToEdit,
+        ]);
     }
 
     /**
@@ -68,7 +88,10 @@ class LinksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $linkToUpdate = Link::findOrFail($id);
+        $validatedInput = $this->validateInput($request);
+        $linkToUpdate->update($validatedInput);   
+        return redirect()->route('links.index');
     }
 
     /**
@@ -79,6 +102,18 @@ class LinksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $linkToDestroy = Link::findOrFail($id);
+        $linkToDestroy->delete(); 
+        return redirect()->route('links.index');
     }
+
+
+public function validateInput(Request $request){
+         $validatedInput = $request->validate([
+            'text' => 'required|string|max:5000',
+            'url' => 'required|string|max:127',
+         ]);
+        return $validatedInput;
+    }
+
 }

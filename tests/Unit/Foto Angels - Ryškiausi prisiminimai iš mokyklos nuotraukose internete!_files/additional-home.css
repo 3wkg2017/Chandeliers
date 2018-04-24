@@ -1,0 +1,37 @@
+
+.login-form__input.error, .mtabs__order-label.error {
+    color: #ff3300;
+}
+
+
+.login-form__input.error, .mtabs__order-input.error {
+    border: 2px solid #ff3300;
+}
+
+.login-form__submit.disabled, .mtabs__btn.disabled {
+    color: #b3b3b3;
+}
+
+.login-form__submit {
+     position: relative
+}
+
+.login-form__submit.loading:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 9px;
+    left: 9px;
+    background-image: url(../images/site/loading.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.mtabs_btn-ok-icon.loading {
+    background: url(../images/site/loading.gif) no-repeat center;
+}
+
+/*.mtabs-content {*/
+    /*padding: 0 0;*/
+/*}*/

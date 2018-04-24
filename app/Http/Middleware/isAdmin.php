@@ -17,16 +17,27 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user(); // false
-        if($user){
-            if($user->name != 'Alante') {
-                return abort(403, 'You are not admin!');
-            }
+        // $user = Auth::user();
+        // if($user){
+        //     if($user->user_type != 'admin') {
+        //         return abort(403, 'You are not admin!');
+        //     }
+        // }
+        // else if(Auth::guest()) {
+        //     return abort(403);
+        // } else {
+            
+        // }
+
+
+        $user = Auth::user();
+        if($user->user_type == 'admin'){
+            return $next($request);
         }
-        else if(Auth::guest()) {
+        else {
             return abort(403);
         }
 
-        return $next($request);
-    }
+
+  }
 }

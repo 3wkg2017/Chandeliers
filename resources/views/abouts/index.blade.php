@@ -1,4 +1,4 @@
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->user_type == 'admin')
 	@extends('layouts.app')
 	@section('content')
 
@@ -7,6 +7,8 @@
 				<div class="panel panel-default">
 			  		<div class="panel-heading"><h3>Apie projektą</h3></div>
 			  		<div class="panel-body">
+			  			<a href="{{ route('abouts.create') }}"><button class="btn btn-primary">Kurti naują</button></a>
+
 			  			<table class="table table-striped">
 						  <thead>
 						    <tr>
@@ -17,12 +19,12 @@
 						  <tbody>
 							@foreach($abouts as $about)
 						    <tr>
-						      <td>{{ $loop->index }}</td>
+						      <td>{{ $loop->index+1 }}</td>
 						      <td>{!! $about->text !!}</td>
 						
 						      
 							  <td scope="col">
-							  		<form action="{{ route('abouts.edit', $about) }}" method="get" >
+							  		<form action="{{ route('abouts.edit', $about) }}" method="post" >
 											{{ csrf_field() }}
 										    <button class="no-style"><i class="fa fa-edit" style="color:green"></i></button>
 									</form>
@@ -41,6 +43,7 @@
 						</table>
 			     	{{ $abouts->render() }}
 					</div>
+				   	
 	 			</div>
 	   		</div>
 		</div>

@@ -7,6 +7,14 @@ use App\Post;
 
 class PostsController extends Controller
 {
+    
+      public function __construct()
+    {
+        $this->middleware('isAdmin', ['except' => ['index', 'show']]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -83,7 +91,7 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $postToUpdate = Post::findOrFail($id);
-        $validatedInput = $this->validatedInput($request);
+        $validatedInput = $this->validateInput($request);
         $postToUpdate->update($validatedInput);   
         return redirect()->route('posts.index');
     }
