@@ -10,15 +10,14 @@
 	</div>
 	<article>	
 		<div class="panel panel-default">
-		
             <div class="panel-body">
             @foreach($cards as $card)
-            <a href="#">
+            <a href="{{ route('cards.show', $card->id) }}">
 				<div class="card mb-3">
 					<div class="card-body">
 						<h2>{{ $card->title }}</h2>
 						@foreach($card->images as $image)
-						<img style="max-width: 100px;" src="{{ asset($image->image)  }}" alt="{{ $image->title }}" />
+						<img class="img-responsive" style="max-width: 300px" src="{{ asset($image->image)  }}" alt="{{ $image->title }}" />
 						@endforeach
 						<p><strong>Pagaminimo laikas: </strong>{{ $card->from_date }} - {{ $card->till_date }}</p>
 						<p><strong>Pagaminimo vieta: {{ $card->country }}</strong></p>

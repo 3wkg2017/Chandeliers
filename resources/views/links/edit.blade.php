@@ -15,7 +15,7 @@
                             <label for="text" class="col-md-4 control-label">Aprašas</label>
                             <div class="col-md-6">
                             	 <textarea id="text" type="text" class="form-control" name="text" required autofocus >
-                					{{ old('text', $link->text }}
+                					{{ old('text', $link->text) }}
            						</textarea>
            					    <script>
                 					CKEDITOR.replace( 'text' );
@@ -33,8 +33,7 @@
                             <label for="url" class="col-md-4 control-label">Nuoroda</label>
 
                             <div class="col-md-6">
-                                <input id="url" type="text" class="form-control" name="url" value="{{ old('url', $url) }}" required autofocus>
-
+                                <input id="url" type="text" class="form-control" name="url" value="{{ old('url', $link->url) }}" required autofocus>
                                 @if ($errors->has('url'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('url') }}</strong>

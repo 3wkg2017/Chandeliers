@@ -12,9 +12,9 @@
                                 <h3>Kontaktai</h3>
                             </div>
                             <div class="panel-body">
-                                <p><i class="fa fa-user" aria-hidden="true"></i> Dr. Alantė Valtaitė</p>
+                                <p><i class="fa fa-user" aria-hidden="true"></i> Dr. Alantė Valtaitė-Gagač</p>
                                 <p><i class="fa fa-envelope" aria-hidden="true"></i> sietynupavedas<img src=" {{ asset('img/Service/eta.png') }}" alt="Eta">gmail.com</p>
-                                <p><i class="fa fa-copyright" aria-hidden="true"></i> <span class="thisYear"></span> Visos teises saugomos</p>
+                                <p><i class="fa fa-copyright" aria-hidden="true"></i> <span class="thisYear"></span> Visos teisės saugomos</p>
                                     <script>
                                         var d = new Date();
                                         var n = d.getFullYear(); 

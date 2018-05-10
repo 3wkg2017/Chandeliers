@@ -3,12 +3,7 @@
 <main>
   <div class='row'>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <!-- <div class="mainImageContainer">
-               <img src="{{ asset('img/Carousel/1.jpg') }}" alt='Sietynas' class="home-image">  
-               <h1 class="welcome-text set-left">Lietynų paveldas Lietuvoje</h1>
-               <h2 class="welcome-text set-center">...išsaugokim trapumą...</h2>
-               <p class="welcome-text set-right" >...Pirmas etapas...</p>
-            </div> -->
+
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                       <li data-target="#myCarousel" data-slide-to="0"></li>
@@ -28,9 +23,9 @@
                           </div>
                         @endfor
                     
-               <h1 class="welcome-text set-left">Sietynų paveldas Lietuvoje</h1>
-               <h2 class="welcome-text set-center">išsaugokim trapumą</h2>
-               <h3 class="welcome-text set-right" >Pirmas etapas</h3>
+                         <h1 class="welcome-text set-left">Sietynų paveldas Lietuvoje</h1>
+                         <h2 class="welcome-text set-center">išsaugokim trapumą</h2>
+                         <h3 class="welcome-text set-right" >Pirmas etapas</h3>
                     
                         <div class="carousel-caption hide">
                           <h1>Historical Chandeliers in Lithuania</h1>
@@ -75,20 +70,27 @@
             @endforeach
 
 
-           @foreach($articles as $article)
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Straipsniai</h3>
+                </div>
+              <div class="panel panel-default">
+            @foreach($articles as $article)
+
            <div class='row' id="articles">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  <div class="panel panel-default">
                     <div class="panel-body">
-
-                    <a href="{{ asset($article->url) }}"><i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i></a>
+                      <a href="{{ asset($article->url) }}"><i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i></a>
                      <p>{!!$article->text!!}</p> 
                     </div>
                   </div>
               </div>
-            </div>
            @endforeach
- 
+           </div>
+            </div>
+              
+          
+          
 
 
           @foreach($links as $link)
@@ -96,7 +98,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="panel panel-default">
                 <div class="panel-body">
-                  <p>{!! $link->text !!}</p>
+                  <p>{!! $link->text !!}<a href="{{ $link->url }}"><i class="fa fa-external-link"></i></a></p>
+
                 </div>
               </div>
             </div>

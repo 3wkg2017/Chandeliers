@@ -62,7 +62,7 @@
 
 
                         <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
-                            <label for="style" class="col-md-4 control-label">Stylius</label>
+                            <label for="style" class="col-md-4 control-label">Stilius</label>
 
                             <div class="col-md-6">
                                 <input id="style" type="text" class="form-control" name="style" value="{{ old('style') }}" required autofocus>

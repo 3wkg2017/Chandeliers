@@ -1,5 +1,5 @@
 
-@if(Auth::check() && Auth::user()->user_type == 'admin')
+<!-- @if(Auth::check() && Auth::user()->user_type == 'admin') -->
 @extends('layouts.app')
 @section('content')
 
@@ -8,17 +8,17 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         	<div class="panel panel-default">
 				
-						<div class="gallery-holder">							
+						<!-- <div class="gallery-holder">							 -->
 							<div class="image-holder">
 								@foreach($card->images as $image)
 								<a href="#">
-									<img src="{{ asset($image->image)  }}" alt="{{ $image->title }}" />
+									<img class="image_carrete" style="max-width: 250px"  src="{{ asset($image->image)  }}" alt="{{ $image->title }}" />
 								</a>
 								@endforeach
 							</div>
 						
 					
-					
+						<br />
 						<div class="content-holder">
 							<h2>{{ $card->title }}</h2>
 						 	<p><strong>Adresas:</strong> {{ $card->address }}</p>
@@ -35,7 +35,7 @@
 								@endforeach
 							</ol>
 						</div>			
-					</div>
+					<!-- </div> -->
 			
 			</div>
 		</div>

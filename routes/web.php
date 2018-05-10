@@ -25,6 +25,8 @@ Route::resource('/abouts', 'AboutsController');
 // Route::get('/abouts/create', 'AboutsController@create')->name('abouts.create')->middleware('isAdmin');
 // Route::post('/abouts/store', 'AboutsController@store')->name('abouts.store')->middleware('isAdmin');
 Route::post('/abouts/edit/{id}', 'AboutsController@edit')->name('abouts.edit');
+
+
 // Route::get('/abouts/destroy/{id}', 'AboutsController@destroy')->name('abouts.destroy')->middleware('isAdmin');
  Route::put('/abouts/update/{id}', 'AboutsController@update')->name('abouts.update');
 

@@ -110,7 +110,7 @@ class EnglishsController extends Controller
 
 public function validateInput(Request $request){
          $validatedInput = $request->validate([
-            'text' => 'required|string|max:5000',
+            'text' => 'required|string|max:10000',
          ]);
         return $validatedInput;
     }

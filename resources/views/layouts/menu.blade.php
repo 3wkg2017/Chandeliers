@@ -10,7 +10,7 @@
                                     </a>
                                 </div>
                                 <ul class="nav navbar-nav">
-                                    <li><a href="{{ route('welcome')}}#about">Apie projektą</a></li>
+                                    <li><a href="{{ route('welcome')}}#abouts">Apie projektą</a></li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sietynai
                                             <span class="caret"></span>
@@ -23,7 +23,7 @@
                                             <li><a href="{{ route('cards.catalog', ['sort_order' => 4]) }}">Pagal pagaminimo šalį</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{ route('cards.catalog', ['sort_order' => 5]) }}">Sunikę sietynai</a></li>
+                                    <li><a href="{{ route('cards.catalog', ['sort_order' => 5]) }}">Sunykę sietynai</a></li>
                                     <!-- <li><a href="{{ route('welcome') }}#posts">Naujenos</a></li> -->
                                     <li><a href="{{ route('welcome') }}#articles">Straipsniai</a></li>
                                     <li><a href="{{ route('welcome') }}#links">Nuorodos</a></li>
