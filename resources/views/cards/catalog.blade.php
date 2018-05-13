@@ -10,19 +10,42 @@
 	</div>
 	<article>	
 		<div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body catalog-container">
             @foreach($cards as $card)
             <a href="{{ route('cards.show', $card->id) }}">
 				<div class="card mb-3">
 					<div class="card-body">
-						<h2>{{ $card->title }}</h2>
-						@foreach($card->images as $image)
-						<img class="img-responsive" style="max-width: 300px" src="{{ asset($image->image)  }}" alt="{{ $image->title }}" />
-						@endforeach
+						<h3>{{ $card->title }}</h3>
+						<img class="catalog" style="max-width: 250px" src="{{ asset($card->images[0]->image)  }}" alt="{{ $card->images[0]->title }}" />
 						<p><strong>Pagaminimo laikas: </strong>{{ $card->from_date }} - {{ $card->till_date }}</p>
-						<p><strong>Pagaminimo vieta: {{ $card->country }}</strong></p>
-						<p><strong>Medžiaga, technika:</strong>{{ $card->material }}</p>
-						<p><strong>Matmenys: </strong> {{ $card->size }}</p>
+						<p><strong>Pagaminimo vieta:</strong> {{ $card->country }}</p>
+					
+					</div>	
+				</div>
+			</a>
+			@endforeach    
+			  @foreach($cards as $card)
+            <a href="{{ route('cards.show', $card->id) }}">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h2>{{ $card->title }}</h2>
+						<img class="catalog" style="max-width: 250px" src="{{ asset($card->images[0]->image)  }}" alt="{{ $card->images[0]->title }}" />
+						<p><strong>Pagaminimo laikas: </strong>{{ $card->from_date }} - {{ $card->till_date }}</p>
+						<p><strong>Pagaminimo vieta:</strong> {{ $card->country }}</p>
+					
+					</div>	
+				</div>
+			</a>
+			@endforeach    
+			  @foreach($cards as $card)
+            <a href="{{ route('cards.show', $card->id) }}">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h2>{{ $card->title }}</h2>
+						<img class="catalog" style="max-width: 250px" src="{{ asset($card->images[0]->image)  }}" alt="{{ $card->images[0]->title }}" />
+						<p><strong>Pagaminimo laikas: </strong>{{ $card->from_date }} - {{ $card->till_date }}</p>
+						<p><strong>Pagaminimo vieta:</strong> {{ $card->country }}</p>
+					
 					</div>	
 				</div>
 			</a>

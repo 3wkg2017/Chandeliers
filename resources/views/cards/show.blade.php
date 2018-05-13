@@ -1,5 +1,4 @@
 
-<!-- @if(Auth::check() && Auth::user()->user_type == 'admin') -->
 @extends('layouts.app')
 @section('content')
 
@@ -11,8 +10,9 @@
 						<!-- <div class="gallery-holder">							 -->
 							<div class="image-holder">
 								@foreach($card->images as $image)
-								<a href="#">
+								<a href="{{ route('cards.imageviewer', $image) }}">
 									<img class="image_carrete" style="max-width: 250px"  src="{{ asset($image->image)  }}" alt="{{ $image->title }}" />
+									
 								</a>
 								@endforeach
 							</div>
@@ -43,4 +43,3 @@
 		
 	
 @endsection
-@endif

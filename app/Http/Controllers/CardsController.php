@@ -19,7 +19,7 @@ class CardsController extends Controller
     
       public function __construct()
     {
-        $this->middleware('isAdmin', ['except' => ['catalog', 'show']]);
+        $this->middleware('isAdmin', ['except' => ['catalog', 'show', 'imageviewer']]);
     }
 
 
@@ -129,6 +129,14 @@ class CardsController extends Controller
         ]);
     }
 
+ public function imageviewer($image)
+    {
+            $imageToShow = Image::findOrFail($image); 
+            return view('cards.imageviewer', [
+                 'image' => $imageToShow, 
+             ]);
+
+    }
 
 
     public function catalog($sort_type)

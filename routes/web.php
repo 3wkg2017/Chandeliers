@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/cards/imageviewer/{image}', 'CardsController@imageviewer')->name('cards.imageviewer');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/cards', 'CardsController');
@@ -21,10 +23,17 @@ Route::put('/cards/update/{id}', 'CardsController@update')->name('cards.update')
 // Route::get('/cards/destroy/{id}', 'CardsController@destroy')->name('cards.destroy')->middleware('isAdmin');
 Route::get('/cards/catalog/{sort_type}', 'CardsController@catalog')->name('cards.catalog');
 
+
+
+
 Route::resource('/abouts', 'AboutsController');
 // Route::get('/abouts/create', 'AboutsController@create')->name('abouts.create')->middleware('isAdmin');
 // Route::post('/abouts/store', 'AboutsController@store')->name('abouts.store')->middleware('isAdmin');
 Route::post('/abouts/edit/{id}', 'AboutsController@edit')->name('abouts.edit');
+
+
+
+
 
 
 // Route::get('/abouts/destroy/{id}', 'AboutsController@destroy')->name('abouts.destroy')->middleware('isAdmin');
