@@ -9,15 +9,11 @@
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('cards.update', $card->id) }}" enctype="multipart/form-data">
                        {{ method_field('PUT') }}
-                        {{ csrf_field() }}
-                          
-
+                       {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">Pavadinimas</label>
-
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control" name="title" value="{{ old('title', $card->title) }}" required autofocus>
-
                                 @if ($errors->has('title'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -57,8 +53,6 @@
                                         </option>
                                     @endforeach      
                                 </select>    
-                                
-
                                 @if ($errors->has('region'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('region') }}</strong>
@@ -66,10 +60,6 @@
                                 @endif
                             </div>
                         </div>
-
-
-
-
                         <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
                             <label for="style" class="col-md-4 control-label">Stylius</label>
 
@@ -257,10 +247,6 @@
                             </div>
                         </div>
                         </div>
-
-
-
-
                         <!-- end of references -->
                         <div>
                          @for($i = 0; $i<=5; $i++)

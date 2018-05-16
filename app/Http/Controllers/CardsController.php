@@ -222,9 +222,6 @@ class CardsController extends Controller
     public function update(Request $request, $id)
     {
         $cardToUpdate = Card::findOrFail($id);
-        
-     
-
         $validatedCard = $this->validateCard($request);
         $cardToUpdate->update($validatedCard);   
         $cardToUpdate->references()->update();
@@ -281,17 +278,17 @@ class CardsController extends Controller
             'till_date' => 'required|string|max:127',
             'text' => 'required|string|max:5000',
             'file-0' => 'required|image|max:5120',
-            'file-1' => 'nullable|image|max:127',
-            'file-2' => 'nullable|image|max:127',
-            'file-3' => 'nullable|image|max:127',
-            'file-4' => 'nullable|image|max:127',
-            'file-5' => 'nullable|image|max:127',
-            'file-title-0' => 'required|string|max:127',
-            'file-title-1' => 'nullable|string|max:127',
-            'file-title-2' => 'nullable|string|max:127',
-            'file-title-3' => 'nullable|string|max:127',
-            'file-title-4' => 'nullable|string|max:127',
-            'file-title-5' => 'nullable|string|max:127',
+            'file-1' => 'nullable|image|max:1000',
+            'file-2' => 'nullable|image|max:1000',
+            'file-3' => 'nullable|image|max:1000',
+            'file-4' => 'nullable|image|max:1000',
+            'file-5' => 'nullable|image|max:1000',
+            'file-title-0' => 'required|string|max:256',
+            'file-title-1' => 'nullable|string|max:256',
+            'file-title-2' => 'nullable|string|max:256',
+            'file-title-3' => 'nullable|string|max:256',
+            'file-title-4' => 'nullable|string|max:256',
+            'file-title-5' => 'nullable|string|max:256',
             'reference-0' => 'required|string|max:256',
             'reference-1' => 'nullable|string|max:256',
             'reference-2' => 'nullable|string|max:256',

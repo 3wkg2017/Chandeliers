@@ -8,7 +8,7 @@
                 <div class="panel-heading">Nuorodos</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('links.update', $link->id) }}">
-                              {{ method_field('PUT') }}
+                        {{ method_field('PUT') }}
                         {{ csrf_field() }}
                        	<script src="http://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 						<div class="form-group{{ $errors->has('text', $link) ? ' has-error' : '' }}">

@@ -53,7 +53,7 @@
 							</form>
 				</td>
 				  <td scope="col">
-				  		<form action="{{ route('cards.edit', $card) }}" method="get" >
+				  		<form action="{{ route('cards.edit', $card) }}" method="post" >
 								{{ csrf_field() }}
 							    <button class="no-style"><i class="fa fa-edit" style="color:green"></i></button>
 						</form>
